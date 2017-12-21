@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newhope.nlbp.core.apigate.dao.NlbpSysOrderDao">
+	<select id="selectByNlbpOrderNo" resultType="com.newhope.nlbp.core.apigate.bean.NlbpSysOrderModel">
+		SELECT 
+			<include refid="nlbpSysOrderColumns"/>
+		FROM nlbp_sys_order a
+		<include refid="nlbpSysOrderJoins"/>
+		WHERE a.Nlbp_Order_No = #{orderNo}
+		and a.Expand1 = #{expand1}
+	</select>
+	<select id="getEBSworkOrderNum" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT ebs_order_no , creation_date,date_format(Biz_Date,'%Y-%c-%d %h:%i:%s') FROM
+		nlbp_sys_order
+		WHERE Batch_Number=#{batch_code,
+		jdbcType=VARCHAR} and Expand1=#{org_id, jdbcType=VARCHAR} and
+		Inventory_Item_Id=#{item_code, jdbcType=VARCHAR} and Order_Status='2' order by creation_date desc
+	</select>
+	
+	<select id="getEBSworkOrderNumUsingEP" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT ebs_order_no , creation_date,date_format(Biz_Date,'%Y-%c-%d %h:%i:%s') FROM
+		nlbp_sys_order
+		WHERE Ear_Number=#{ear_num,
+		jdbcType=VARCHAR} and Expand1=#{org_id, jdbcType=VARCHAR} and
+		Inventory_Item_Id=#{item_code, jdbcType=VARCHAR} and Order_Status='2' order by creation_date desc
+	</select>
+	<update id="updateOrderEBSOrderNo"
+		parameterType="com.newhope.nlbp.core.apigate.bean.NlbpSysOrderModel">
+		update nlbp_sys_order
+		<set>
+			<if test="ebsOrderNo != null and ebsOrderNo != ''">
+				EBS_Order_No = #{ebsOrderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				Last_Update_Date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+			</if>
+			Last_Update_by = 'create order'
+		</set>
+		where Nlbp_Order_No = #{nlbpOrderNo,jdbcType=VARCHAR} and Expand1 = #{expand1,jdbcType=VARCHAR}
+	</update>
+	<select id="selectOrderFromCreateSucess"
+		resultType="com.newhope.nlbp.core.apigate.bean.NlbpSysOrderModel">
+		SELECT
+		<include refid="nlbpSysOrderColumns" />
+		FROM nlbp_sys_order a
+		where 
+		<if test="nlbpOrderNo != null and nlbpOrderNo != ''">
+			a.Nlbp_Order_No =#{nlbpOrderNo,jdbcType=VARCHAR}
+		</if>
+		<if test="expand1 != null and expand1 != ''">
+			AND a.Expand1 =#{expand1,jdbcType=VARCHAR}
+		</if>
+	    <![CDATA[
+	  		and a.ebs_order_no is not null
+	  	]]>
+	</select>
+</mapper>

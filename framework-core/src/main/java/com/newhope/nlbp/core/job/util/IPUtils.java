@@ -1,0 +1,69 @@
+package com.newhope.nlbp.core.job.util;
+
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
+
+import org.apache.commons.lang3.StringUtils;
+
+public class IPUtils {
+	
+	public static boolean isRunable(String ips){
+		String localIp = getIp();
+		if(StringUtils.isNotBlank(ips)){
+			for(String configIp : ips.split(",")){
+				if(localIp.equals(configIp)){
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+
+	 /** 
+     * 多IP处理，可以得到最终ip 
+     * @return 
+     */  
+    public static String getIp() {  
+        String localip = null;// 本地IP，如果没有配置外网IP则返回它  
+        String netip = null;// 外网IP  
+        try {  
+            Enumeration<NetworkInterface> netInterfaces = NetworkInterface  
+                    .getNetworkInterfaces();  
+            InetAddress ip = null;  
+            boolean finded = false;// 是否找到外网IP  
+            while (netInterfaces.hasMoreElements() && !finded) {  
+                NetworkInterface ni = netInterfaces.nextElement();  
+                Enumeration<InetAddress> address = ni.getInetAddresses();  
+                while (address.hasMoreElements()) {  
+                    ip = address.nextElement();  
+//                  System.out.println(ni.getName() + ";" + ip.getHostAddress()  
+//                          + ";ip.isSiteLocalAddress()="  
+//                          + ip.isSiteLocalAddress()  
+//                          + ";ip.isLoopbackAddress()="  
+//                          + ip.isLoopbackAddress());  
+                    if (!ip.isSiteLocalAddress() && !ip.isLoopbackAddress()  
+                            && ip.getHostAddress().indexOf(":") == -1) {// 外网IP  
+                        netip = ip.getHostAddress();  
+                        finded = true;  
+                        break;  
+                    } else if (ip.isSiteLocalAddress()  
+                            && !ip.isLoopbackAddress()  
+                            && ip.getHostAddress().indexOf(":") == -1) {// 内网IP  
+                        localip = ip.getHostAddress();  
+                    }  
+                }  
+            }  
+        } catch (SocketException e) {  
+            e.printStackTrace();  
+        }  
+        if (netip != null && !"".equals(netip)) {  
+            return netip;  
+        } else {  
+            return localip;  
+        }  
+    }
+	
+}

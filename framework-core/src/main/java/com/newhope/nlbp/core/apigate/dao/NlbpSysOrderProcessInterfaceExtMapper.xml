@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newhope.nlbp.core.apigate.dao.NlbpSysOrderProcessInterfaceDao">
+    
+	<update id="alterStatusToSuccess" parameterType="java.util.Map" >
+		UPDATE nlbp_sys_order_process
+		<set>					
+			<if test="handlerStatus != null">					
+				handler_status = #{handlerStatus},
+			</if>		
+		</set>
+		<where>
+			<if test="processIds != null">
+        	process_Id in 
+			<foreach item="item" index="index" collection="processIds" open="(" separator="," close=")">  
+		 		 #{item} 
+			</foreach> 
+			</if>
+		</where>
+	</update>
+	
+	<select id="getFirstPageMaxId" resultType="java.lang.Long">
+		SELECT MAX(process_Id) FROM nlbp_sys_order_process where 1=1;	
+	</select>
+	
+	<select id="getOtherPageMaxId" resultType="java.lang.Long" parameterType="java.lang.Long">
+		SELECT MAX(process_Id) FROM nlbp_sys_order_process where process_Id <![CDATA[ < ]]> 上一页最小id;	
+	</select>
+	
+		<select id="searchListPigFirstPage" resultType="com.newhope.nlbp.common.model.NlbpSysOrderProcessInterfaceModel">
+		SELECT DISTINCT
+			<include refid="nlbpSysOrderProcessInterfacePigColumns"/>
+				FROM nlbp_sys_order_process a
+				left join nlbp_sys_material mat on a.inventory_item_id = mat.number
+				left join nlbp_sys_org org on a.expand1 = org.id
+				LEFT JOIN nlbp_sys_org_ebs oe ON oe.ebs_org_code = a.ebs_org_code
+				LEFT JOIN nlbp_pig_hogpen hog ON hog.number = a.Farm_Code
+				LEFT JOIN nlbp_pig_warehouse wh ON wh.number = a.Sub_Inventroy_Code 
+			<include refid="nlbpSysOrderProcessInterfaceJoins"/>
+		<where>
+			
+			<if test="interfaceType != null and interfaceType != ''">
+				AND a.interface_type = #{interfaceType}
+			</if>
+			<if test="docNum != null and docNum != ''">
+				AND a.doc_num = #{docNum}
+			</if>
+			<if test="eventId != null and eventId != ''">
+				AND a.event_id = #{eventId}
+			</if>
+			<if test="pbCode != null and pbCode != ''">
+				AND a.pb_code = #{pbCode}
+			</if>
+			<if test="ebsOrgCode != null and ebsOrgCode != ''">
+				AND a.ebs_org_code = #{ebsOrgCode}
+			</if>
+			<if test="farmCode != null and farmCode != ''">
+				AND a.farm_code = #{farmCode}
+			</if>
+			<if test="bizDate != null and bizDate != ''">
+				AND a.biz_date = #{bizDate}
+			</if>
+			<if test="nlbpOrderNo != null and nlbpOrderNo != ''">
+				AND a.nlbp_order_no = #{nlbpOrderNo}
+			</if>
+			
+			<if test="nlbpIORepertory != null and nlbpIORepertory != ''">
+				AND a.expand7 = #{nlbpIORepertory}
+			</if>
+			<if test="nlbpPurchOrder != null and nlbpPurchOrder != ''">
+				AND a.nlbp_purch_order = #{nlbpPurchOrder}
+			</if>
+			
+			<if test="transactionType != null and transactionType != ''">
+				AND a.transaction_type = #{transactionType}
+			</if>
+			<if test="primaryUomQty != null and primaryUomQty != ''">
+				AND a.primary_uom_qty = #{primaryUomQty}
+			</if>
+			<if test="secondUomQty != null and secondUomQty != ''">
+				AND a.second_uom_qty = #{secondUomQty}
+			</if>
+			<if test="orderType != null and orderType != ''">
+				AND a.order_type = #{orderType}
+			</if>
+			<if test="ebsOrderNo != null and ebsOrderNo != ''">
+				AND a.ebs_order_no = #{ebsOrderNo}
+			</if>
+			<if test="roomCode != null and roomCode != ''">
+				AND a.room_code = #{roomCode}
+			</if>
+			<if test="earNumber != null and earNumber != ''">
+				AND a.ear_number = #{earNumber}
+			</if>
+			<if test="subInventroyCode != null and subInventroyCode != ''">
+				AND a.sub_inventroy_code = #{subInventroyCode}
+			</if>
+			<if test="inventoryItemId != null and inventoryItemId != ''">
+				AND a.inventory_item_id = #{inventoryItemId}
+			</if>
+			<if test="conceiveStatus != null and conceiveStatus != ''">
+				AND a.conceive_status = #{conceiveStatus}
+			</if>
+			<if test="batchNumber != null and batchNumber != ''">
+				AND a.batch_number = #{batchNumber}
+			</if>
+			<if test="birdCheck != null and birdCheck != ''">
+				AND a.bird_check = #{birdCheck}
+			</if>
+			<if test="breedDate != null and breedDate != ''">
+				AND a.breed_date = #{breedDate}
+			</if>
+			<if test="uperStage != null and uperStage != ''">
+				AND a.uper_stage = #{uperStage}
+			</if>
+			<if test="totalRecordCount != null and totalRecordCount != ''">
+				AND a.total_record_count = #{totalRecordCount}
+			</if>
+			<if test="handlerStatus != null and handlerStatus != ''">
+				AND a.handler_status = #{handlerStatus}
+			</if>
+			<if test="handlerCount != null and handlerCount != ''">
+				AND a.handler_count = #{handlerCount}
+			</if>
+			<if test="processCode != null and processCode != ''">
+				AND a.process_code = #{processCode}
+			</if>
+			<if test="processMessage != null and processMessage != ''">
+				AND a.process_message = #{processMessage}
+			</if>
+			<if test="creationDate != null and creationDate != ''">
+				AND a.creation_date = #{creationDate}
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				AND a.created_by = #{createdBy}
+			</if>
+			<if test="lastUpdateDate != null and lastUpdateDate != ''">
+				AND a.last_update_date = #{lastUpdateDate}
+			</if>
+			<if test="lastUpdateBy != null and lastUpdateBy != ''">
+				AND a.last_update_by = #{lastUpdateBy}
+			</if>
+			<if test="organizationId != null and organizationId != ''">
+				AND a.expand1 = #{organizationId}
+			</if>
+			<!-- 日期查询条件 -->
+			<if test="queryStartDate != null and queryStartDate != ''">
+	 	        <![CDATA[
+		    	AND a.biz_date>= #{queryStartDate}
+		        ]]>
+	 	    </if>
+		    <if test="queryEndDate != null and queryEndDate != ''">
+	 	        <![CDATA[
+		    	AND a.biz_date <= #{queryEndDate}
+		        ]]>
+	 	    </if>
+			
+		</where>
+		
+		ORDER BY processId DESC LIMIT 50;
+	</select>
+	
+	
+	
+	
+	
+</mapper>

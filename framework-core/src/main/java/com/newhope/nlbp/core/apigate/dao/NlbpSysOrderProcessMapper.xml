@@ -1,0 +1,1021 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newhope.nlbp.core.apigate.dao.NlbpSysOrderProcessDao">
+    
+	<sql id="nlbpSysOrderProcessColumns">
+		a.process_id AS "processId",
+		a.interface_type AS "interfaceType",
+		a.doc_num AS "docNum",
+		a.event_id AS "eventId",
+		a.pb_code AS "pbCode",
+		a.ebs_org_code AS "ebsOrgCode",
+		a.farm_code AS "farmCode",
+		a.biz_date AS "bizDate",
+		a.nlbp_order_no AS "nlbpOrderNo",
+		a.transaction_type AS "transactionType",
+		a.primary_uom_qty AS "primaryUomQty",
+		a.second_uom_qty AS "secondUomQty",
+		a.order_type AS "orderType",
+		a.ebs_order_no AS "ebsOrderNo",
+		a.room_code AS "roomCode",
+		a.ear_number AS "earNumber",
+		a.sub_inventroy_code AS "subInventroyCode",
+		a.inventory_item_id AS "inventoryItemId",
+		a.conceive_status AS "conceiveStatus",
+		a.batch_number AS "batchNumber",
+		a.bird_check AS "birdCheck",
+		a.breed_date AS "breedDate",
+		a.uper_stage AS "uperStage",
+		a.total_record_count AS "totalRecordCount",
+		a.handler_status AS "handlerStatus",
+		a.handler_count AS "handlerCount",
+		a.process_code AS "processCode",
+		a.process_message AS "processMessage",
+		a.creation_date AS "creationDate",
+		a.created_by AS "createdBy",
+		a.last_update_date AS "lastUpdateDate",
+		a.last_update_by AS "lastUpdateBy",
+		a.expand1 AS "expand1",
+		a.price AS "price",
+		a.expand2 AS "expand2",
+		a.ebs_purch_order AS "ebsPurchOrder",
+		a.nlbp_purch_order AS "nlbpPurchOrder",
+		a.expand3 AS "expand3",
+		a.expand4 AS "expand4",
+		a.org_code AS "orgCode",
+		a.expand5 AS "expand5",
+		a.expand6 AS "expand6",
+		a.expand7 AS "expand7",
+		a.expand8 AS "expand8",
+		a.expand9 AS "expand9",
+		a.expand10 AS "expand10",
+		a.attribute1 AS "attribute1",
+		a.attribute5 AS "attribute5",
+		a.attribute2 AS "attribute2",
+		a.attribute3 AS "attribute3",
+		a.attribute4 AS "attribute4"
+	</sql>
+	
+	<sql id="nlbpSysOrderProcessJoins">
+	</sql>
+    
+	<select id="selectByPrimaryKey" resultType="com.newhope.nlbp.core.apigate.bean.NlbpSysOrderProcessModel">
+		SELECT 
+			<include refid="nlbpSysOrderProcessColumns"/>
+		FROM nlbp_sys_order_process a
+		<include refid="nlbpSysOrderProcessJoins"/>
+		WHERE a.process_id = #{id}
+	</select>
+	
+	<select id="findList" resultType="com.newhope.nlbp.core.apigate.bean.NlbpSysOrderProcessModel">
+		SELECT 
+		<include refid="nlbpSysOrderProcessColumns"/>
+		FROM nlbp_sys_order_process a
+		<include refid="nlbpSysOrderProcessJoins"/>
+		<where>
+			
+			<if test="interfaceType != null and interfaceType != ''">
+				AND a.interface_type = #{interfaceType}
+			</if>
+			<if test="docNum != null and docNum != ''">
+				AND a.doc_num = #{docNum}
+			</if>
+			<if test="eventId != null and eventId != ''">
+				AND a.event_id = #{eventId}
+			</if>
+			<if test="pbCode != null and pbCode != ''">
+				AND a.pb_code = #{pbCode}
+			</if>
+			<if test="ebsOrgCode != null and ebsOrgCode != ''">
+				AND a.ebs_org_code = #{ebsOrgCode}
+			</if>
+			<if test="farmCode != null and farmCode != ''">
+				AND a.farm_code = #{farmCode}
+			</if>
+			<if test="bizDate != null and bizDate != ''">
+				AND a.biz_date = #{bizDate}
+			</if>
+			<if test="nlbpOrderNo != null and nlbpOrderNo != ''">
+				AND a.nlbp_order_no = #{nlbpOrderNo}
+			</if>
+			<if test="transactionType != null and transactionType != ''">
+				AND a.transaction_type = #{transactionType}
+			</if>
+			<if test="primaryUomQty != null and primaryUomQty != ''">
+				AND a.primary_uom_qty = #{primaryUomQty}
+			</if>
+			<if test="secondUomQty != null and secondUomQty != ''">
+				AND a.second_uom_qty = #{secondUomQty}
+			</if>
+			<if test="orderType != null and orderType != ''">
+				AND a.order_type = #{orderType}
+			</if>
+			<if test="ebsOrderNo != null and ebsOrderNo != ''">
+				AND a.ebs_order_no = #{ebsOrderNo}
+			</if>
+			<if test="roomCode != null and roomCode != ''">
+				AND a.room_code = #{roomCode}
+			</if>
+			<if test="earNumber != null and earNumber != ''">
+				AND a.ear_number = #{earNumber}
+			</if>
+			<if test="subInventroyCode != null and subInventroyCode != ''">
+				AND a.sub_inventroy_code = #{subInventroyCode}
+			</if>
+			<if test="inventoryItemId != null and inventoryItemId != ''">
+				AND a.inventory_item_id = #{inventoryItemId}
+			</if>
+			<if test="conceiveStatus != null and conceiveStatus != ''">
+				AND a.conceive_status = #{conceiveStatus}
+			</if>
+			<if test="batchNumber != null and batchNumber != ''">
+				AND a.batch_number = #{batchNumber}
+			</if>
+			<if test="birdCheck != null and birdCheck != ''">
+				AND a.bird_check = #{birdCheck}
+			</if>
+			<if test="breedDate != null and breedDate != ''">
+				AND a.breed_date = #{breedDate}
+			</if>
+			<if test="uperStage != null and uperStage != ''">
+				AND a.uper_stage = #{uperStage}
+			</if>
+			<if test="totalRecordCount != null and totalRecordCount != ''">
+				AND a.total_record_count = #{totalRecordCount}
+			</if>
+			<if test="handlerStatus != null and handlerStatus != ''">
+				AND a.handler_status = #{handlerStatus}
+			</if>
+			<if test="handlerCount != null and handlerCount != ''">
+				AND a.handler_count = #{handlerCount}
+			</if>
+			<if test="processCode != null and processCode != ''">
+				AND a.process_code = #{processCode}
+			</if>
+			<if test="processMessage != null and processMessage != ''">
+				AND a.process_message = #{processMessage}
+			</if>
+			<if test="creationDate != null and creationDate != ''">
+				AND a.creation_date = #{creationDate}
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				AND a.created_by = #{createdBy}
+			</if>
+			<if test="lastUpdateDate != null and lastUpdateDate != ''">
+				AND a.last_update_date = #{lastUpdateDate}
+			</if>
+			<if test="lastUpdateBy != null and lastUpdateBy != ''">
+				AND a.last_update_by = #{lastUpdateBy}
+			</if>
+			<if test="expand1 != null and expand1 != ''">
+				AND a.expand1 = #{expand1}
+			</if>
+			<if test="price != null and price != ''">
+				AND a.price = #{price}
+			</if>
+			<if test="expand2 != null and expand2 != ''">
+				AND a.expand2 = #{expand2}
+			</if>
+			<if test="ebsPurchOrder != null and ebsPurchOrder != ''">
+				AND a.ebs_purch_order = #{ebsPurchOrder}
+			</if>
+			<if test="nlbpPurchOrder != null and nlbpPurchOrder != ''">
+				AND a.nlbp_purch_order = #{nlbpPurchOrder}
+			</if>
+			<if test="expand3 != null and expand3 != ''">
+				AND a.expand3 = #{expand3}
+			</if>
+			<if test="expand4 != null and expand4 != ''">
+				AND a.expand4 = #{expand4}
+			</if>
+			<if test="orgCode != null and orgCode != ''">
+				AND a.org_code = #{orgCode}
+			</if>
+			<if test="expand5 != null and expand5 != ''">
+				AND a.expand5 = #{expand5}
+			</if>
+			<if test="expand6 != null and expand6 != ''">
+				AND a.expand6 = #{expand6}
+			</if>
+			<if test="expand7 != null and expand7 != ''">
+				AND a.expand7 = #{expand7}
+			</if>
+			<if test="expand8 != null and expand8 != ''">
+				AND a.expand8 = #{expand8}
+			</if>
+			<if test="expand9 != null and expand9 != ''">
+				AND a.expand9 = #{expand9}
+			</if>
+			<if test="expand10 != null and expand10 != ''">
+				AND a.expand10 = #{expand10}
+			</if>
+			<if test="attribute1 != null and attribute1 != ''">
+				AND a.attribute1 = #{attribute1}
+			</if>
+			<if test="attribute5 != null and attribute5 != ''">
+				AND a.attribute5 = #{attribute5}
+			</if>
+			<if test="attribute2 != null and attribute2 != ''">
+				AND a.attribute2 = #{attribute2}
+			</if>
+			<if test="attribute3 != null and attribute3 != ''">
+				AND a.attribute3 = #{attribute3}
+			</if>
+			<if test="attribute4 != null and attribute4 != ''">
+				AND a.attribute4 = #{attribute4}
+			</if>
+		</where>
+		<!--
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+		-->
+	</select>
+	
+	<select id="findAllList" resultType="com.newhope.nlbp.core.apigate.bean.NlbpSysOrderProcessModel">
+		SELECT 
+			<include refid="nlbpSysOrderProcessColumns"/>
+		FROM nlbp_sys_order_process a
+		<include refid="nlbpSysOrderProcessJoins"/>
+		<where>
+			
+		</where>
+		<!--		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+		-->
+	</select>
+	
+	<insert id="insert">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+	      SELECT LAST_INSERT_ID()
+	    </selectKey>
+		INSERT INTO nlbp_sys_order_process(
+			process_id,
+			interface_type,
+			doc_num,
+			event_id,
+			pb_code,
+			ebs_org_code,
+			farm_code,
+			biz_date,
+			nlbp_order_no,
+			transaction_type,
+			primary_uom_qty,
+			second_uom_qty,
+			order_type,
+			ebs_order_no,
+			room_code,
+			ear_number,
+			sub_inventroy_code,
+			inventory_item_id,
+			conceive_status,
+			batch_number,
+			bird_check,
+			breed_date,
+			uper_stage,
+			total_record_count,
+			handler_status,
+			handler_count,
+			process_code,
+			process_message,
+			creation_date,
+			created_by,
+			last_update_date,
+			last_update_by,
+			expand1,
+			price,
+			expand2,
+			ebs_purch_order,
+			nlbp_purch_order,
+			expand3,
+			expand4,
+			org_code,
+			expand5,
+			expand6,
+			expand7,
+			expand8,
+			expand9,
+			expand10,
+			attribute1,
+			attribute5,
+			attribute2,
+			attribute3,
+			attribute4
+		) VALUES (
+			#{processId},
+			#{interfaceType},
+			#{docNum},
+			#{eventId},
+			#{pbCode},
+			#{ebsOrgCode},
+			#{farmCode},
+			#{bizDate},
+			#{nlbpOrderNo},
+			#{transactionType},
+			#{primaryUomQty},
+			#{secondUomQty},
+			#{orderType},
+			#{ebsOrderNo},
+			#{roomCode},
+			#{earNumber},
+			#{subInventroyCode},
+			#{inventoryItemId},
+			#{conceiveStatus},
+			#{batchNumber},
+			#{birdCheck},
+			#{breedDate},
+			#{uperStage},
+			#{totalRecordCount},
+			#{handlerStatus},
+			#{handlerCount},
+			#{processCode},
+			#{processMessage},
+			#{creationDate},
+			#{createdBy},
+			#{lastUpdateDate},
+			#{lastUpdateBy},
+			#{expand1},
+			#{price},
+			#{expand2},
+			#{ebsPurchOrder},
+			#{nlbpPurchOrder},
+			#{expand3},
+			#{expand4},
+			#{orgCode},
+			#{expand5},
+			#{expand6},
+			#{expand7},
+			#{expand8},
+			#{expand9},
+			#{expand10},
+			#{attribute1},
+			#{attribute5},
+			#{attribute2},
+			#{attribute3},
+			#{attribute4}
+		)
+	</insert>
+	
+	<insert id="insertSelective" parameterType="com.newhope.nlbp.core.apigate.bean.NlbpSysOrderProcessModel">
+		
+		INSERT INTO nlbp_sys_order_process
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="processId != null">				
+				process_id,
+			</if>
+			<if test="interfaceType != null">				
+				interface_type,
+			</if>
+			<if test="docNum != null">				
+				doc_num,
+			</if>
+			<if test="eventId != null">				
+				event_id,
+			</if>
+			<if test="pbCode != null">				
+				pb_code,
+			</if>
+			<if test="ebsOrgCode != null">				
+				ebs_org_code,
+			</if>
+			<if test="farmCode != null">				
+				farm_code,
+			</if>
+			<if test="bizDate != null">				
+				biz_date,
+			</if>
+			<if test="nlbpOrderNo != null">				
+				nlbp_order_no,
+			</if>
+			<if test="transactionType != null">				
+				transaction_type,
+			</if>
+			<if test="primaryUomQty != null">				
+				primary_uom_qty,
+			</if>
+			<if test="secondUomQty != null">				
+				second_uom_qty,
+			</if>
+			<if test="orderType != null">				
+				order_type,
+			</if>
+			<if test="ebsOrderNo != null">				
+				ebs_order_no,
+			</if>
+			<if test="roomCode != null">				
+				room_code,
+			</if>
+			<if test="earNumber != null">				
+				ear_number,
+			</if>
+			<if test="subInventroyCode != null">				
+				sub_inventroy_code,
+			</if>
+			<if test="inventoryItemId != null">				
+				inventory_item_id,
+			</if>
+			<if test="conceiveStatus != null">				
+				conceive_status,
+			</if>
+			<if test="batchNumber != null">				
+				batch_number,
+			</if>
+			<if test="birdCheck != null">				
+				bird_check,
+			</if>
+			<if test="breedDate != null">				
+				breed_date,
+			</if>
+			<if test="uperStage != null">				
+				uper_stage,
+			</if>
+			<if test="totalRecordCount != null">				
+				total_record_count,
+			</if>
+			<if test="handlerStatus != null">				
+				handler_status,
+			</if>
+			<if test="handlerCount != null">				
+				handler_count,
+			</if>
+			<if test="processCode != null">				
+				process_code,
+			</if>
+			<if test="processMessage != null">				
+				process_message,
+			</if>
+			<if test="creationDate != null">				
+				creation_date,
+			</if>
+			<if test="createdBy != null">				
+				created_by,
+			</if>
+			<if test="lastUpdateDate != null">				
+				last_update_date,
+			</if>
+			<if test="lastUpdateBy != null">				
+				last_update_by,
+			</if>
+			<if test="expand1 != null">				
+				expand1,
+			</if>
+			<if test="price != null">				
+				price,
+			</if>
+			<if test="expand2 != null">				
+				expand2,
+			</if>
+			<if test="ebsPurchOrder != null">				
+				ebs_purch_order,
+			</if>
+			<if test="nlbpPurchOrder != null">				
+				nlbp_purch_order,
+			</if>
+			<if test="expand3 != null">				
+				expand3,
+			</if>
+			<if test="expand4 != null">				
+				expand4,
+			</if>
+			<if test="orgCode != null">				
+				org_code,
+			</if>
+			<if test="expand5 != null">				
+				expand5,
+			</if>
+			<if test="expand6 != null">				
+				expand6,
+			</if>
+			<if test="expand7 != null">				
+				expand7,
+			</if>
+			<if test="expand8 != null">				
+				expand8,
+			</if>
+			<if test="expand9 != null">				
+				expand9,
+			</if>
+			<if test="expand10 != null">				
+				expand10,
+			</if>
+			<if test="attribute1 != null">				
+				attribute1,
+			</if>
+			<if test="attribute5 != null">				
+				attribute5,
+			</if>
+			<if test="attribute2 != null">				
+				attribute2,
+			</if>
+			<if test="attribute3 != null">				
+				attribute3,
+			</if>
+			<if test="attribute4 != null">				
+				attribute4
+			</if>
+	</trim>
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="processId != null">
+			#{processId},
+		</if>
+		<if test="interfaceType != null">
+			#{interfaceType},
+		</if>
+		<if test="docNum != null">
+			#{docNum},
+		</if>
+		<if test="eventId != null">
+			#{eventId},
+		</if>
+		<if test="pbCode != null">
+			#{pbCode},
+		</if>
+		<if test="ebsOrgCode != null">
+			#{ebsOrgCode},
+		</if>
+		<if test="farmCode != null">
+			#{farmCode},
+		</if>
+		<if test="bizDate != null">
+			#{bizDate},
+		</if>
+		<if test="nlbpOrderNo != null">
+			#{nlbpOrderNo},
+		</if>
+		<if test="transactionType != null">
+			#{transactionType},
+		</if>
+		<if test="primaryUomQty != null">
+			#{primaryUomQty},
+		</if>
+		<if test="secondUomQty != null">
+			#{secondUomQty},
+		</if>
+		<if test="orderType != null">
+			#{orderType},
+		</if>
+		<if test="ebsOrderNo != null">
+			#{ebsOrderNo},
+		</if>
+		<if test="roomCode != null">
+			#{roomCode},
+		</if>
+		<if test="earNumber != null">
+			#{earNumber},
+		</if>
+		<if test="subInventroyCode != null">
+			#{subInventroyCode},
+		</if>
+		<if test="inventoryItemId != null">
+			#{inventoryItemId},
+		</if>
+		<if test="conceiveStatus != null">
+			#{conceiveStatus},
+		</if>
+		<if test="batchNumber != null">
+			#{batchNumber},
+		</if>
+		<if test="birdCheck != null">
+			#{birdCheck},
+		</if>
+		<if test="breedDate != null">
+			#{breedDate},
+		</if>
+		<if test="uperStage != null">
+			#{uperStage},
+		</if>
+		<if test="totalRecordCount != null">
+			#{totalRecordCount},
+		</if>
+		<if test="handlerStatus != null">
+			#{handlerStatus},
+		</if>
+		<if test="handlerCount != null">
+			#{handlerCount},
+		</if>
+		<if test="processCode != null">
+			#{processCode},
+		</if>
+		<if test="processMessage != null">
+			#{processMessage},
+		</if>
+		<if test="creationDate != null">
+			#{creationDate},
+		</if>
+		<if test="createdBy != null">
+			#{createdBy},
+		</if>
+		<if test="lastUpdateDate != null">
+			#{lastUpdateDate},
+		</if>
+		<if test="lastUpdateBy != null">
+			#{lastUpdateBy},
+		</if>
+		<if test="expand1 != null">
+			#{expand1},
+		</if>
+		<if test="price != null">
+			#{price},
+		</if>
+		<if test="expand2 != null">
+			#{expand2},
+		</if>
+		<if test="ebsPurchOrder != null">
+			#{ebsPurchOrder},
+		</if>
+		<if test="nlbpPurchOrder != null">
+			#{nlbpPurchOrder},
+		</if>
+		<if test="expand3 != null">
+			#{expand3},
+		</if>
+		<if test="expand4 != null">
+			#{expand4},
+		</if>
+		<if test="orgCode != null">
+			#{orgCode},
+		</if>
+		<if test="expand5 != null">
+			#{expand5},
+		</if>
+		<if test="expand6 != null">
+			#{expand6},
+		</if>
+		<if test="expand7 != null">
+			#{expand7},
+		</if>
+		<if test="expand8 != null">
+			#{expand8},
+		</if>
+		<if test="expand9 != null">
+			#{expand9},
+		</if>
+		<if test="expand10 != null">
+			#{expand10},
+		</if>
+		<if test="attribute1 != null">
+			#{attribute1},
+		</if>
+		<if test="attribute5 != null">
+			#{attribute5},
+		</if>
+		<if test="attribute2 != null">
+			#{attribute2},
+		</if>
+		<if test="attribute3 != null">
+			#{attribute3},
+		</if>
+		<if test="attribute4 != null">
+			#{attribute4}
+		</if>
+		</trim>
+	</insert>
+	
+	
+	<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+		<selectKey resultType="long" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO nlbp_sys_order_process(
+			process_id,
+			interface_type,
+			doc_num,
+			event_id,
+			pb_code,
+			ebs_org_code,
+			farm_code,
+			biz_date,
+			nlbp_order_no,
+			transaction_type,
+			primary_uom_qty,
+			second_uom_qty,
+			order_type,
+			ebs_order_no,
+			room_code,
+			ear_number,
+			sub_inventroy_code,
+			inventory_item_id,
+			conceive_status,
+			batch_number,
+			bird_check,
+			breed_date,
+			uper_stage,
+			total_record_count,
+			handler_status,
+			handler_count,
+			process_code,
+			process_message,
+			creation_date,
+			created_by,
+			last_update_date,
+			last_update_by,
+			expand1,
+			price,
+			expand2,
+			ebs_purch_order,
+			nlbp_purch_order,
+			expand3,
+			expand4,
+			org_code,
+			expand5,
+			expand6,
+			expand7,
+			expand8,
+			expand9,
+			expand10,
+			attribute1,
+			attribute5,
+			attribute2,
+			attribute3,
+			attribute4
+		) VALUES 
+		<foreach collection="list" item="item" index="index" separator="," >
+		(
+			#{item.processId},
+			#{item.interfaceType},
+			#{item.docNum},
+			#{item.eventId},
+			#{item.pbCode},
+			#{item.ebsOrgCode},
+			#{item.farmCode},
+			#{item.bizDate},
+			#{item.nlbpOrderNo},
+			#{item.transactionType},
+			#{item.primaryUomQty},
+			#{item.secondUomQty},
+			#{item.orderType},
+			#{item.ebsOrderNo},
+			#{item.roomCode},
+			#{item.earNumber},
+			#{item.subInventroyCode},
+			#{item.inventoryItemId},
+			#{item.conceiveStatus},
+			#{item.batchNumber},
+			#{item.birdCheck},
+			#{item.breedDate},
+			#{item.uperStage},
+			#{item.totalRecordCount},
+			#{item.handlerStatus},
+			#{item.handlerCount},
+			#{item.processCode},
+			#{item.processMessage},
+			#{item.creationDate},
+			#{item.createdBy},
+			#{item.lastUpdateDate},
+			#{item.lastUpdateBy},
+			#{item.expand1},
+			#{item.price},
+			#{item.expand2},
+			#{item.ebsPurchOrder},
+			#{item.nlbpPurchOrder},
+			#{item.expand3},
+			#{item.expand4},
+			#{item.orgCode},
+			#{item.expand5},
+			#{item.expand6},
+			#{item.expand7},
+			#{item.expand8},
+			#{item.expand9},
+			#{item.expand10},
+			#{item.attribute1},
+			#{item.attribute5},
+			#{item.attribute2},
+			#{item.attribute3},
+			#{item.attribute4}
+		)
+		</foreach>
+	</insert>
+	
+	<update id="updateByPrimaryKey">
+		UPDATE nlbp_sys_order_process SET 	
+			process_id = #{processId},
+			interface_type = #{interfaceType},
+			doc_num = #{docNum},
+			event_id = #{eventId},
+			pb_code = #{pbCode},
+			ebs_org_code = #{ebsOrgCode},
+			farm_code = #{farmCode},
+			biz_date = #{bizDate},
+			nlbp_order_no = #{nlbpOrderNo},
+			transaction_type = #{transactionType},
+			primary_uom_qty = #{primaryUomQty},
+			second_uom_qty = #{secondUomQty},
+			order_type = #{orderType},
+			ebs_order_no = #{ebsOrderNo},
+			room_code = #{roomCode},
+			ear_number = #{earNumber},
+			sub_inventroy_code = #{subInventroyCode},
+			inventory_item_id = #{inventoryItemId},
+			conceive_status = #{conceiveStatus},
+			batch_number = #{batchNumber},
+			bird_check = #{birdCheck},
+			breed_date = #{breedDate},
+			uper_stage = #{uperStage},
+			total_record_count = #{totalRecordCount},
+			handler_status = #{handlerStatus},
+			handler_count = #{handlerCount},
+			process_code = #{processCode},
+			process_message = #{processMessage},
+			creation_date = #{creationDate},
+			created_by = #{createdBy},
+			last_update_date = #{lastUpdateDate},
+			last_update_by = #{lastUpdateBy},
+			expand1 = #{expand1},
+			price = #{price},
+			expand2 = #{expand2},
+			ebs_purch_order = #{ebsPurchOrder},
+			nlbp_purch_order = #{nlbpPurchOrder},
+			expand3 = #{expand3},
+			expand4 = #{expand4},
+			org_code = #{orgCode},
+			expand5 = #{expand5},
+			expand6 = #{expand6},
+			expand7 = #{expand7},
+			expand8 = #{expand8},
+			expand9 = #{expand9},
+			expand10 = #{expand10},
+			attribute1 = #{attribute1},
+			attribute5 = #{attribute5},
+			attribute2 = #{attribute2},
+			attribute3 = #{attribute3},
+			attribute4 = #{attribute4}
+		WHERE id = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<update id="updateByPrimaryKeySelective" parameterType="com.newhope.nlbp.core.apigate.bean.NlbpSysOrderProcessModel">
+		UPDATE nlbp_sys_order_process
+		<set>	
+		<if test="processId != null">					
+			process_id = #{processId},
+		</if>	
+		<if test="interfaceType != null">					
+			interface_type = #{interfaceType},
+		</if>	
+		<if test="docNum != null">					
+			doc_num = #{docNum},
+		</if>	
+		<if test="eventId != null">					
+			event_id = #{eventId},
+		</if>	
+		<if test="pbCode != null">					
+			pb_code = #{pbCode},
+		</if>	
+		<if test="ebsOrgCode != null">					
+			ebs_org_code = #{ebsOrgCode},
+		</if>	
+		<if test="farmCode != null">					
+			farm_code = #{farmCode},
+		</if>	
+		<if test="bizDate != null">					
+			biz_date = #{bizDate},
+		</if>	
+		<if test="nlbpOrderNo != null">					
+			nlbp_order_no = #{nlbpOrderNo},
+		</if>	
+		<if test="transactionType != null">					
+			transaction_type = #{transactionType},
+		</if>	
+		<if test="primaryUomQty != null">					
+			primary_uom_qty = #{primaryUomQty},
+		</if>	
+		<if test="secondUomQty != null">					
+			second_uom_qty = #{secondUomQty},
+		</if>	
+		<if test="orderType != null">					
+			order_type = #{orderType},
+		</if>	
+		<if test="ebsOrderNo != null">					
+			ebs_order_no = #{ebsOrderNo},
+		</if>	
+		<if test="roomCode != null">					
+			room_code = #{roomCode},
+		</if>	
+		<if test="earNumber != null">					
+			ear_number = #{earNumber},
+		</if>	
+		<if test="subInventroyCode != null">					
+			sub_inventroy_code = #{subInventroyCode},
+		</if>	
+		<if test="inventoryItemId != null">					
+			inventory_item_id = #{inventoryItemId},
+		</if>	
+		<if test="conceiveStatus != null">					
+			conceive_status = #{conceiveStatus},
+		</if>	
+		<if test="batchNumber != null">					
+			batch_number = #{batchNumber},
+		</if>	
+		<if test="birdCheck != null">					
+			bird_check = #{birdCheck},
+		</if>	
+		<if test="breedDate != null">					
+			breed_date = #{breedDate},
+		</if>	
+		<if test="uperStage != null">					
+			uper_stage = #{uperStage},
+		</if>	
+		<if test="totalRecordCount != null">					
+			total_record_count = #{totalRecordCount},
+		</if>	
+		<if test="handlerStatus != null">					
+			handler_status = #{handlerStatus},
+		</if>	
+		<if test="handlerCount != null">					
+			handler_count = #{handlerCount},
+		</if>	
+		<if test="processCode != null">					
+			process_code = #{processCode},
+		</if>	
+		<if test="processMessage != null">					
+			process_message = #{processMessage},
+		</if>	
+		<if test="creationDate != null">					
+			creation_date = #{creationDate},
+		</if>	
+		<if test="createdBy != null">					
+			created_by = #{createdBy},
+		</if>	
+		<if test="lastUpdateDate != null">					
+			last_update_date = #{lastUpdateDate},
+		</if>	
+		<if test="lastUpdateBy != null">					
+			last_update_by = #{lastUpdateBy},
+		</if>	
+		<if test="expand1 != null">					
+			expand1 = #{expand1},
+		</if>	
+		<if test="price != null">					
+			price = #{price},
+		</if>	
+		<if test="expand2 != null">					
+			expand2 = #{expand2},
+		</if>	
+		<if test="ebsPurchOrder != null">					
+			ebs_purch_order = #{ebsPurchOrder},
+		</if>	
+		<if test="nlbpPurchOrder != null">					
+			nlbp_purch_order = #{nlbpPurchOrder},
+		</if>	
+		<if test="expand3 != null">					
+			expand3 = #{expand3},
+		</if>	
+		<if test="expand4 != null">					
+			expand4 = #{expand4},
+		</if>	
+		<if test="orgCode != null">					
+			org_code = #{orgCode},
+		</if>	
+		<if test="expand5 != null">					
+			expand5 = #{expand5},
+		</if>	
+		<if test="expand6 != null">					
+			expand6 = #{expand6},
+		</if>	
+		<if test="expand7 != null">					
+			expand7 = #{expand7},
+		</if>	
+		<if test="expand8 != null">					
+			expand8 = #{expand8},
+		</if>	
+		<if test="expand9 != null">					
+			expand9 = #{expand9},
+		</if>	
+		<if test="expand10 != null">					
+			expand10 = #{expand10},
+		</if>	
+		<if test="attribute1 != null">					
+			attribute1 = #{attribute1},
+		</if>	
+		<if test="attribute5 != null">					
+			attribute5 = #{attribute5},
+		</if>	
+		<if test="attribute2 != null">					
+			attribute2 = #{attribute2},
+		</if>	
+		<if test="attribute3 != null">					
+			attribute3 = #{attribute3},
+		</if>	
+		<if test="attribute4 != null">					
+			attribute4 = #{attribute4}
+		</if>
+		</set>
+		WHERE id = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<update id="deleteByPrimaryKey">
+		DELETE FROM nlbp_sys_order_process
+		WHERE id = #{id,jdbcType=BIGINT}
+	</update>
+	
+</mapper>
