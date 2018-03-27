@@ -1,0 +1,27 @@
+
+
+config server:
+
+1, edit config server properties as below:
+spring.application.name=config-server
+
+spring.profiles.active=native
+spring.cloud.config.server.native.search-locations=file:D:/deploy/config
+
+eureka.instance.prefer-ip-address=true
+eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
+
+management.security.enabled=false
+
+security.basic.enabled=true
+
+security.user.name=hdsc
+security.user.password=hdsc123
+  
+2, register it in euraka
+
+
+3, user config server in other spring boot application
+
+--server.port=9085 --server.context-path=/ --spring.cloud.config.discovery.serviceId=config-server --spring.cloud.config.discovery.enabled=true --spring.cloud.config.name=application --spring.cloud.config.profile=common,db,extcfg,fastdfs,jobs,logservice,mail,rabbit,redis,security,swagger --spring.cloud.config.label=scp-businesscommon-app-service --eureka.client.serviceUrl.defaultZone=http://192.168.0.94:8761/eureka/
+
